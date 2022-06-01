@@ -1,16 +1,9 @@
 #!/bin/sh
 
-agent_preset_passphrase () {
-    /usr/lib/gnupg/gpg-preset-passphrase --preset "$1" <<EOF
-$2
-EOF
-
-}
-
 read -r PAM_PASS
 
 if [ -f /home/"$PAM_USER"/.gnupg/pam_exec-gpg ]; then
-        agent_preset_passphrase "$(cat /home/"$PAM_USER"/.gnupg/pam_exec-gpg)" "$PAM_PASS" &
+    printf "%s" "$PAM_PASS" | /usr/lib/gnupg/gpg-preset-passphrase --passphrase "$(cat)" --preset "$(cat /home/"$PAM_USER"/.gnupg/pam_exec-gpg)"
 fi
 
 exit 0
