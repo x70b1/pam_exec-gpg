@@ -1,9 +1,13 @@
 #!/bin/sh
 
-read -r PAM_PASS
+if [ "$(id -un)" != "$PAM_USER" ]; then
+    su "$PAM_USER" -s "$0" "$@"
+else
+    read -r PAM_PASS
 
-if [ -f /home/"$PAM_USER"/.gnupg/pam_exec-gpg ]; then
-    printf "%s" "$PAM_PASS" | /usr/lib/gnupg/gpg-preset-passphrase --passphrase "$(cat)" --preset "$(cat /home/"$PAM_USER"/.gnupg/pam_exec-gpg)"
+    if [ -f /home/"$PAM_USER"/.gnupg/pam_exec-gpg ]; then
+        printf "%s" "$PAM_PASS" | /usr/lib/gnupg/gpg-preset-passphrase --passphrase "$(cat)" --preset "$(cat /home/"$PAM_USER"/.gnupg/pam_exec-gpg)"
+    fi
 fi
 
 exit 0
