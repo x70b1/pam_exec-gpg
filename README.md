@@ -1,8 +1,8 @@
 # pam_exec-gpg
 
-[![Codecheck](https://github.com/x70b1/pam_exec-gpg/workflows/Codecheck/badge.svg?branch=master)](https://github.com/x70b1/pam_exec-gpg/actions)
-[![GitHub contributors](https://img.shields.io/github/contributors/x70b1/pam_exec-gpg.svg)](https://github.com/x70b1/pam_exec-gpg/graphs/contributors)
-[![license](https://img.shields.io/github/license/x70b1/pam_exec-gpg.svg)](https://github.com/x70b1/pam_exec-gpg/blob/master/LICENSE)
+[![Actions](https://github.com/x70b1/pam_exec-gpg/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/x70b1/pam_exec-gpg/actions)
+[![Contributors](https://img.shields.io/github/contributors/x70b1/pam_exec-gpg.svg)](https://github.com/x70b1/pam_exec-gpg/graphs/contributors)
+[![License](https://img.shields.io/github/license/x70b1/pam_exec-gpg.svg)](https://github.com/x70b1/pam_exec-gpg/blob/master/LICENSE)
 
 Unlock GnuPG keys keys on login using PAM.
 
