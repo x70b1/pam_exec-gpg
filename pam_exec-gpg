@@ -1,6 +1,6 @@
 #!/bin/sh
 
-KEYGRIP_FILE="/home/"$PAM_USER"/.gnupg/pam_exec-gpg"
+KEYGRIP_FILE="/home/$PAM_USER/.gnupg/pam_exec-gpg"
 
 if [ "$(id -un)" != "$PAM_USER" ]; then
     su "$PAM_USER" -s "$0" "$@"
@@ -8,7 +8,7 @@ else
     read -r PAM_PASS
 
     if [ -f "$KEYGRIP_FILE" ]; then
-        while read line; do
+        while read -r line; do
             printf "%s" "$PAM_PASS" | /usr/lib/gnupg/gpg-preset-passphrase --passphrase "$(cat)" --preset "$line"
         done < "$KEYGRIP_FILE"
     fi
