@@ -28,7 +28,7 @@ You need a running `gpg-agent`.
 The agent have to be started before you login.
 Take a look at the wiki how to [configure gpg-agent](https://wiki.archlinux.org/title/GnuPG#gpg-agent).
 
-A file `~/.gnupg/pam_exec-gpg` should contain the keygrip.
+A file `~/.gnupg/pam_exec-gpg` should contain the keygrips, one per line.
 
 Add the PAM call to your config:
 
