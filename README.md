@@ -11,7 +11,7 @@ Unlock GnuPG keys keys on login using PAM.
 
 ## Installation
 
-For Arch Linux users is already a [pam_exec-gpg](https://aur.archlinux.org/packages/pam_exec-gpg/) package in the AUR.
+For Arch Linux users is already a [pam_exec-gpg-git](https://aur.archlinux.org/packages/pam_exec-gpg-git/) package in the AUR.
 
 Otherwise just copy the script, set the permissions and install `pam`.
 
