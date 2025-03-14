@@ -1,16 +1,37 @@
 #!/bin/sh
 
-KEYGRIP_FILE="/home/$PAM_USER/.gnupg/pam_exec-gpg"
-
 if [ "$(id -un)" != "$PAM_USER" ]; then
     su "$PAM_USER" -s "$0" "$@"
 else
     read -r PAM_PASS
 
-    if [ -f "$KEYGRIP_FILE" ]; then
-        while read -r line; do
-            printf "%s" "$PAM_PASS" | /usr/lib/gnupg/gpg-preset-passphrase --passphrase "$(cat)" --preset "$line"
-        done < "$KEYGRIP_FILE"
+    if [ -f "/home/$PAM_USER/.gnupg/pam_exec-gpg" ]; then
+        config="/home/$PAM_USER/.gnupg/pam_exec-gpg"
+    fi
+
+    if [ -f "/home/$PAM_USER/.gnupg/pamcontrol" ]; then
+        config="/home/$PAM_USER/.gnupg/pamcontrol"
+    fi
+
+    if [ -f "/home/$PAM_USER/.config/gnupg/pam_exec-gpg" ]; then
+        config="/home/$PAM_USER/.gnupg/pam_exec-gpg"
+
+        export GNUPGHOME="/home/$PAM_USER/.config/gnupg"
+    fi
+
+    if [ -f "/home/$PAM_USER/.config/gnupg/pamcontrol" ]; then
+        config="/home/$PAM_USER/.config/gnupg/pamcontrol"
+
+        export GNUPGHOME="/home/$PAM_USER/.config/gnupg"
+    fi
+
+
+    if [ -n "$config" ]; then
+        keygrips="$(grep -E '^[0-9A-Z]{40}$' "$config")"
+
+        echo "$keygrips" | while read -r keygrip; do
+            printf "%s" "$PAM_PASS" | /usr/lib/gnupg/gpg-preset-passphrase --passphrase "$(cat)" --preset "$keygrip"
+        done
     fi
 fi
 

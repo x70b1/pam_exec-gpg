@@ -24,11 +24,18 @@ chmod 755 /usr/bin/pam_exec-gpg
 
 ## Configuration
 
-You need a running `gpg-agent`.
-The agent have to be started before you login.
+You need a running `gpg-agent` and the agent have to be started before you login.
 Take a look at the wiki how to [configure gpg-agent](https://wiki.archlinux.org/title/GnuPG#gpg-agent).
+There are several locations that are checked for a config file:
 
-A file `~/.gnupg/pam_exec-gpg` should contain the keygrips, one per line.
+* `~/.gnupg/pam_exec-gpg`
+* `~/.gnupg/pamcontrol`
+* `~/.config/gnupg/pam_exec-gpg`
+* `~/.config/gnupg/pamcontrol`
+
+A config file should contain the keygrips, one per line.
+Comments `#` are allowed.
+
 
 Add the PAM call to your config:
 
