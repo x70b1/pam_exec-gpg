@@ -36,7 +36,6 @@ There are several locations that are checked for a config file:
 A config file should contain the keygrips, one per line.
 Comments `#` are allowed.
 
-
 Add the PAM call to your config:
 
 ```

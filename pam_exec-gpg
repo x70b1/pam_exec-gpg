@@ -3,8 +3,6 @@
 if [ "$(id -un)" != "$PAM_USER" ]; then
     su "$PAM_USER" -s "$0" "$@"
 else
-    read -r PAM_PASS
-
     if [ -f "/home/$PAM_USER/.gnupg/pam_exec-gpg" ]; then
         config="/home/$PAM_USER/.gnupg/pam_exec-gpg"
     fi
@@ -27,6 +25,8 @@ else
 
 
     if [ -n "$config" ]; then
+        read -r PAM_PASS
+
         keygrips="$(grep -E '^[0-9A-Z]{40}$' "$config")"
 
         echo "$keygrips" | while read -r keygrip; do
